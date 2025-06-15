@@ -70,3 +70,19 @@ export interface PaginatedData<T> {
 export type ToolBarOptions = {
     onCreate?: () => void;
 };
+
+
+
+export type Unit = {
+    id: number;
+    name: string;
+    count: number;
+};
+export type Product = {
+    id: number;
+    name_ar: string;
+    barcode: string;
+    name_en: string;
+    units: Unit[];
+    unit_price: number;
+};

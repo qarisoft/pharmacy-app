@@ -8,6 +8,7 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
+use Symfony\Component\HttpFoundation\Response;
 use Tighten\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
@@ -45,6 +46,10 @@ class HandleInertiaRequests extends Middleware
     }
     public function share(Request $request): array
     {
+        $a = Cache::get('products') ;
+        if ($a->isEmpty()) {
+            Product::recache();
+        }
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         return [
@@ -54,7 +59,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'products'=>Cache::get('products') ?? $this->getCachedProducts(),
+            'products'=>Cache::get('products') ,
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
@@ -64,4 +69,5 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }
+
 }

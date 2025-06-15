@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { cn } from '@/lib/utils';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, Product, Unit } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Minus, Plus } from 'lucide-react';
 import { FormEventHandler, PropsWithChildren, useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -16,19 +16,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-type Unit = {
-    id: number;
-    name: string;
-    count: number;
-};
-type Product = {
-    id: number;
-    name_ar: string;
-    barcode: string;
-    name_en: string;
-    units: Unit[];
-    unit_price: number;
-};
+
 type SaleItem = { product_id: number; unit_id: number; quantity: number; end_price: number; product: Product };
 type SalePointForm = {
     header: {
@@ -44,6 +32,9 @@ export default function CreateSale() {
     const {
         props: { products: allProducts },
     } = usePage<{ products: Product[] }>();
+
+    // log(allProducts)
+    console.log(allProducts);
 
     const { data, setData, post } = useForm<SalePointForm>({
         header: {
@@ -178,13 +169,13 @@ export default function CreateSale() {
             if (!search) {
                 return true;
             }
-            if (p.name_ar && p.name_ar.trim().startsWith(search.trim())) {
+            if (p.name_ar && p.name_ar.trim().includes(search.trim())) {
                 return true;
             }
-            if (p.name_en && p.name_en.trim().startsWith(search.trim())) {
+            if (p.name_en && p.name_en.trim().includes(search.trim())) {
                 return true;
             }
-            return !!(p.barcode && p.barcode.startsWith(search));
+            return !!(p.barcode && p.barcode.includes(search));
         });
     }, [allProducts, search]);
 
@@ -260,13 +251,9 @@ export default function CreateSale() {
     const onSubmit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('sales.store'), {
-            // preserveState:true,
-            // onSuccess:()=>{
-            //     reset('items')
-            //     reset('header')
-            // }
         });
     };
+
     return (
         <div>
             <AppLayout breadcrumbs={breadcrumbs}>

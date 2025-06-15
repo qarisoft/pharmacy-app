@@ -38,8 +38,10 @@ export default function Dashboard({ pageData }: { pageData: PaginatedData<Produc
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
+            <div className="max-h-[calc(100vh-5rem)]  overflow-y-auto ">
             <div className="p-4">
                 <DataTable pageData={pageData} columns={columns} path={'products'} />
+            </div>
             </div>
         </AppLayout>
     );

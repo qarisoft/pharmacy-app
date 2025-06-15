@@ -2,6 +2,7 @@
 
 namespace App\Models\Products;
 
+use App\Blamable;
 use App\Models\Store\ProductInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class MeasureUnit extends Model
 {
     /** @use HasFactory<\Database\Factories\Products\MeasureUnitFactory> */
-    use HasFactory;
+    use HasFactory,Blamable;
 
 
     protected $guarded = [];

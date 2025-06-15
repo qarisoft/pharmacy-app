@@ -19,6 +19,7 @@ class ProductsSeeder extends Seeder
         $data = require 'database/seeders/data/products.php';
         Product::factory()->createMany($data);
 
+
     }
 
 

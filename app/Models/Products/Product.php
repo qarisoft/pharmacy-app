@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Cache;
 
 class Product extends Model
 {
@@ -109,6 +110,17 @@ class Product extends Model
     public function units(): HasMany
     {
         return $this->hasMany(MeasureUnit::class);
+    }
+
+    static function cache(): void
+    {
+        Cache::add('products',Product::query()->whereHas('units')-> with('units')->get());
+
+    }
+    static function recache(): void
+    {
+        Cache::forget('products');
+        Product::cache();
     }
 
 

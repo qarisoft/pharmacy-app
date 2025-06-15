@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ToolBarOptions } from '@/types';
-import { router } from '@inertiajs/react';
+import { router, usePage } from '@inertiajs/react';
 import { type Table } from '@tanstack/react-table';
 import { ChevronDown, Plus } from 'lucide-react';
 interface DataTableToolbarProps<TData> {
@@ -17,15 +17,23 @@ export default function TableToolBar<TData>({ table, options }: DataTableToolbar
         }
         router.get(window.location.pathname + '/create');
     };
+    const { url, props } = usePage<{ search: string }>();
+
+    const search = (searchKey: string) => {
+        router.get(url, {
+            search: searchKey
+        }, {
+            preserveState: true,
+            showProgress: false
+        });
+    };
     return (
         <div className="flex items-center justify-between p-4">
             <Input
-                placeholder="Filter emails..."
-                // value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-                // onChange={(event) =>
-                //     table.getColumn("email")?.setFilterValue(event.target.value)
-                // }
-                className="max-w-sm"
+                placeholder="Filter tasks..."
+                defaultValue={route().queryParams['search'] as string}
+                onChange={(e) => search(e.target.value)}
+                className="h-8 pb-1 w-[150px] lg:w-[250px]"
             />
             <div className="flex gap-2">
                 <Button onClick={createFunc} variant={'outline'}>

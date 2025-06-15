@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Sales\SaleController;
+use App\Models\Products\Product;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,6 +18,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('products', ProductController::class);
+    Route::post('products/pull',function(){
+        Product::recache();
+
+    })->name('products.pull');
     Route::resource('sales', SaleController::class);
 
 });

@@ -14,17 +14,18 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
 
 export function NavMain({ items }: { items: NavItemGroup[] }) {
-    // const a = usePage()
-    // console.log(a.url,route().current());
+    const a = usePage()
+    console.log(a.url,route().current());
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
-                    <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
+                    <Collapsible key={item.title} asChild defaultOpen={route().current()?.includes(item.href)} className="group/collapsible">
                         <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
                                 <SidebarMenuButton tooltip={item.title}>
@@ -33,13 +34,13 @@ export function NavMain({ items }: { items: NavItemGroup[] }) {
                                     <ChevronLeft className="ms-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                 </SidebarMenuButton>
                             </CollapsibleTrigger>
-                            <CollapsibleContent>
+                            <CollapsibleContent >
                                 <SidebarMenuSub>
                                     {item.items?.map((subItem) => (
-                                        <SidebarMenuSubItem key={subItem.title}>
+                                        <SidebarMenuSubItem key={subItem.title}  className={''} >
                                             <SidebarMenuSubButton asChild>
-                                                <Link href={route(subItem.href)}>
-                                                    <span>{subItem.title}</span>
+                                                <Link href={route(subItem.href)}   >
+                                                    <span className={cn(route().current()===subItem.href?'text-blue-600 text-[16px]':"")}>{subItem.title}</span>
                                                 </Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>

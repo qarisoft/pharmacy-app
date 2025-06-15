@@ -2,6 +2,7 @@
 
 namespace App\Models\Store;
 
+use App\Blamable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ProductInputHeader extends Model
 {
     /** @use HasFactory<\Database\Factories\Store\ProductInputHeaderFactory> */
-    use HasFactory;
+    use HasFactory,Blamable;
     protected $guarded=[];
 
     public function items(): HasMany

@@ -30,7 +30,16 @@ const mainNavItemsGroups: NavItemGroup[] = [
         title: 'Products',
         href: 'products',
         icon: LayoutGrid,
-        items: [],
+        items: [
+            {
+                title: 'Index',
+                href: 'products.index',
+            },
+            {
+                title: 'Create',
+                href: 'products.create',
+            },
+        ],
     },
     {
         title: 'Sales',

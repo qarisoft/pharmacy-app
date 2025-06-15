@@ -33,6 +33,7 @@ class MeasureUnitNameSeeder extends Seeder
             ['id'=>14,'name'=>'حقنة'],
             ['id'=>15,'name'=>'قرص'],
             ['id'=>16,'name'=>'قطر'],
+            ['id'=>17,'name'=>'علبة'],
         ]);
 
     }
