@@ -86,7 +86,9 @@ return [
                 . $this->mkId('end_price', $p->end_price)
                 . $this->mkId('cost_price', $p->cost_price)
                 . $this->mkIdZero('discount', $p->discount)
+                . $this->mkIdZero('addition', $p->addition)
                 . $this->mk('customer_name', $p->customer_name)
+                . $this->mk('note', $p->note)
                 . $this->mk('created_at', $p->created_at)
                 . $this->mk('updated_at', $p->updated_at)
                 . $this->_close();
