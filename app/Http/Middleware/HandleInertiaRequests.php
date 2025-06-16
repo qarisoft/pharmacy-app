@@ -52,6 +52,9 @@ class HandleInertiaRequests extends Middleware
         }
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
+        $string = file_get_contents(lang_path() . '/' . 'ar.json');
+        $json_a = json_decode($string);
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -64,6 +67,8 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'locale' => app()->currentLocale(),
+            'lang_json'=>$json_a,
             'success'=>session()->get('success'),
             'failure'=>session()->get('failure'),
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',

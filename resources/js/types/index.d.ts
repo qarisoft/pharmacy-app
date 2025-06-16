@@ -21,6 +21,7 @@ export interface NavItem {
     icon?: LucideIcon | null;
     isActive?: boolean;
 }
+
 export interface NavItemGroup {
     title: string;
     href: string;
@@ -28,17 +29,20 @@ export interface NavItemGroup {
     isActive?: boolean;
     items: NavSubItem[];
 }
+
 export interface NavSubItem {
     title: string;
     href: string;
     isActive?: boolean;
 }
+
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
     sidebarOpen: boolean;
+
     [key: string]: unknown;
 }
 
@@ -50,8 +54,10 @@ export interface User {
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;
+
     [key: string]: unknown; // This allows for additional properties...
 }
+
 export interface PaginatedData<T> {
     current_page: number;
     data: T[];
@@ -67,11 +73,10 @@ export interface PaginatedData<T> {
     to: number;
     total: number;
 }
+
 export type ToolBarOptions = {
     onCreate?: () => void;
 };
-
-
 
 export type Unit = {
     id: number;
@@ -85,4 +90,25 @@ export type Product = {
     name_en: string;
     units: Unit[];
     unit_price: number;
+};
+
+export type SaleHeader = {
+    customer_name: string;
+    note: string;
+    end_price: number;
+    discount: number;
+    addition: number;
+    id?: number;
+};
+export type SaleItem = {
+    id?: number;
+    product_id: number;
+    unit_id: number;
+    quantity: number;
+    end_price: number;
+    product: Product;
+};
+export type SalePointForm = {
+    header: SaleHeader;
+    items: SaleItem[];
 };

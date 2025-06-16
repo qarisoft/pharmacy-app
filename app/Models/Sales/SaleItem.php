@@ -12,7 +12,7 @@ class SaleItem extends Model
 {
     /** @use HasFactory<\Database\Factories\Sales\SaleItemFactory> */
     use HasFactory;
-
+    protected $with=['product'];
     protected $guarded = [];
 
 
