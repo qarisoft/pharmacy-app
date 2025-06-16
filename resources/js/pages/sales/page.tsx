@@ -168,7 +168,7 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
             const ep = (getUnit(item)?.count ?? 0) * item.product.unit_price * item.quantity;
             a += ep;
         });
-        // a-=data.header.discount
+        // a+=data.header.addition
         return a;
     }, [data.items]);
 
@@ -655,7 +655,7 @@ function Details({
                     </div>
                     <div className="flex gap-2 p-1">
                         <div className="">{__('total price')} :</div>
-                        <div className="">{saleTotal - discount}</div>
+                        <div className="">{saleTotal - discount + addition}</div>
                     </div>
                 </div>
             </div>
