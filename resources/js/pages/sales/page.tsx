@@ -192,6 +192,15 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
         },
         [setData],
     );
+    const onProductSelected = useCallback((p:Product) => {
+        setProduct(p);
+        setValue('');
+
+        setProductOpen(false);
+        window.requestAnimationFrame(()=>{
+            quantityRef.current?.focus();
+        })
+    },[])
 
     const {t,__}=useLang()
 
@@ -207,8 +216,10 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
                         <div className="flex justify-start gap-2">
                             <div className="">
                                 <FormInputGroup label={__('product')}>
-                                    <Popover open={productOpen} onOpenChange={setProductOpen} key={'product-id-select'}>
+                                    <Popover   open={productOpen} onOpenChange={setProductOpen} key={'product-id-select'}>
                                         <PopoverTrigger
+                                            key={'search'}
+                                            id={'search'}
                                             asChild
                                             autoFocus
                                             onKeyDown={(k) => {
@@ -287,11 +298,7 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
                                                             //     setProductOpen(false)
                                                             // }}
                                                             value={product.id.toString()}
-                                                            onSelect={() => {
-                                                                setProduct(product);
-                                                                setValue('');
-                                                                setProductOpen(false);
-                                                            }}
+                                                            onSelect={()=>onProductSelected(product)}
                                                         >
                                                             {product.name_ar}
                                                             <Check
