@@ -137,6 +137,8 @@ class SaleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $header = SaleHeader::query()->find($id);
+        $header->items()->delete();
+        $header->delete();
     }
 }

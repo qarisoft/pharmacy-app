@@ -240,7 +240,7 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
                                                     variant="outline"
                                                     role="combobox"
                                                     aria-expanded={open}
-                                                    className="w-[300px] justify-between pe-2"
+                                                    className="w-[400px] overflow-x-clip justify-between pe-2"
                                                 >
                                                     {product ? product.name_ar : 'Search'}
                                                     <div className="flex">
@@ -279,7 +279,7 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
                                             <Command>
                                                 <Input
                                                     placeholder="Search framework..."
-                                                    className="h-9"
+                                                    className="h-9 w-[500px]"
                                                     value={value}
                                                     onChange={(s) => {
                                                         if (product) {

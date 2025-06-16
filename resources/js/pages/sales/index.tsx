@@ -7,7 +7,17 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { useLang } from '@/hooks/useLang';
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
@@ -94,13 +104,39 @@ export default function Dashboard({ pageData }: { pageData: PaginatedData<SaleHe
                         >
                             {__('edit')}
                         </Button>
-                        <div
-                            onClick={() => {
-                                router.get(route('sales.destroy', row.original.id));
-                            }}
-                            className={'px-3 py-2 text-xs text-red-700'}
-                        >
-                            {__('del')}
+                        <div className="">
+
+                        <AlertDialog  >
+                            <AlertDialogTrigger asChild>
+                                <div
+
+                                    className={'px-3 py-2 text-xs text-red-700'}
+                                >
+                                    {__('del')}
+                                </div>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent dir={'ltr'}>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This action cannot be undone. This will permanently delete your
+                                        account and remove your data from our servers.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction
+
+                                        className={'bg-red-600'}
+
+                                        onClick={() => {
+                                            router.delete(route('sales.destroy', row.original.id));
+                                        }}
+
+                                    >Continue</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                         </div>
                     </div>
                 );
