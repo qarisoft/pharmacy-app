@@ -62,7 +62,7 @@ class SaleController extends Controller
             $header->items()->create([
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'end_price' => number_format($unit->count * $item['quantity'] * $product->unit_price, 1),
+                'end_price' =>$unit->count * $item['quantity'] * $product->unit_price,
                 'product_price' => $product->unit_price,
                 'unit_id' => $item['unit_id'],
                 'unit_count' => $unit->count,
@@ -107,19 +107,20 @@ class SaleController extends Controller
         $header->update($data);
 
         foreach ($request->items as $item) {
+            $unit = MeasureUnit::find($item['unit_id']);
+            $product = Product::find($item['product_id']);
             if (array_key_exists('id',$item)) {
                 $saleItem = SaleItem::query()->find($item['id']);
                 $saleItem->update([
                     'quantity' => $item['quantity'],
                     'unit_id' => $item['unit_id'],
+                    'end_price' =>$unit->count * $item['quantity'] * $product->unit_price,
                 ]);
             }else{
-                $unit = MeasureUnit::find($item['unit_id']);
-                $product = Product::find($item['product_id']);
                 $header->items()->create([
                     'product_id' => $item['product_id'],
                     'quantity' => $item['quantity'],
-                    'end_price' => number_format($unit->count * $item['quantity'] * $product->unit_price, 1),
+                    'end_price' => $unit->count * $item['quantity'] * $product->unit_price,
                     'product_price' => $product->unit_price,
                     'unit_id' => $item['unit_id'],
                     'unit_count' => $unit->count,
