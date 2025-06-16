@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $a = Cache::get('products') ;
-        if ($a->isEmpty()) {
+        if ($a&&$a->isEmpty()) {
             Product::recache();
         }
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
