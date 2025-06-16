@@ -344,5 +344,6 @@ return [
 ['id'=>341,'quantity'=>1,'product_id'=>336,'header_id'=>18,'vendor_id'=>null,'payment_type'=>'cash','total_cost_price'=>500,'unit_cost_price'=>500,'expire_date'=>null,'unit_id'=>469,'created_at'=>'2025-06-12 07:27:20','updated_at'=>'2025-06-12 07:28:05',],
 ['id'=>342,'quantity'=>4,'product_id'=>338,'header_id'=>19,'vendor_id'=>null,'payment_type'=>'cash','total_cost_price'=>8000,'unit_cost_price'=>2000,'expire_date'=>null,'unit_id'=>475,'created_at'=>'2025-06-12 15:39:52','updated_at'=>'2025-06-12 15:39:57',],
 ['id'=>343,'quantity'=>2,'product_id'=>340,'header_id'=>19,'vendor_id'=>null,'payment_type'=>'cash','total_cost_price'=>1200,'unit_cost_price'=>600,'expire_date'=>null,'unit_id'=>477,'created_at'=>'2025-06-12 15:45:56','updated_at'=>'2025-06-12 15:46:28',],
+['id'=>344,'quantity'=>1,'product_id'=>399,'header_id'=>20,'vendor_id'=>null,'payment_type'=>'cash','total_cost_price'=>1300,'unit_cost_price'=>1300,'expire_date'=>null,'unit_id'=>554,'created_at'=>'2025-06-16 03:57:43','updated_at'=>'2025-06-16 03:58:22',],
 
 ];
