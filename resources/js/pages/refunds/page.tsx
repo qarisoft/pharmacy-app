@@ -283,14 +283,11 @@ export default function SaleForm({autofocus,header,items,path,header_id}:{
                                                     {products.map((product) => (
                                                         <CommandItem
                                                             key={product.id}
-                                                            // onClick={()=>{
-                                                            //     setProductOpen(false)
-                                                            // }}
                                                             value={product.id.toString()}
                                                             onSelect={() => {
                                                                 setProduct(product);
                                                                 setValue('');
-                                                                setProductOpen(false);
+                                                                // setOpen(false);
                                                             }}
                                                         >
                                                             {product.name_ar}
